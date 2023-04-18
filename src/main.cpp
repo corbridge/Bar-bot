@@ -28,14 +28,15 @@ void setup() {
 
   u8g2.begin();
   u8g2.enableUTF8Print();
-  u8g2.setFont(u8g2_font_t0_12_tf); 
+  u8g2.setFont(u8g2_font_profont11_tf); 
   u8g2.setColorIndex(1); 
 }
 
 void loop() {
   u8g2.firstPage();
-  
-    do {   
-    u8g2.drawStr( 15, 13, "Temperature");
-  } while( u8g2.nextPage() );
+    do
+    {   
+      u8g2.drawTriangle(0,30, 0,40, 5,35);
+      u8g2.drawStr(10, 39, "HOla");
+    } while( u8g2.nextPage() );
 }
