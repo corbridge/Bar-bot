@@ -36,7 +36,8 @@ void setup() {
 void loop() {
   u8g2.firstPage();
     do
-    {   
+    { 
+      u8g2.drawLine(150, 18, 0, 18);
       u8g2.drawTriangle(0,20, 0,30, 5,25);
       drawTitle();
       u8g2.setFont(u8g2_font_profont11_tf);
