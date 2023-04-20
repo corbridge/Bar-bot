@@ -37,13 +37,13 @@ void loop() {
   u8g2.firstPage();
     do
     {   
-      // u8g2.drawTriangle(0,30, 0,40, 5,35);
-      // u8g2.drawStr(10, 39, "HOla");
-
-      // u8g2.drawStr(25, 15, "BAR-BOT");
+      u8g2.drawTriangle(0,20, 0,30, 5,25);
       drawTitle();
       u8g2.setFont(u8g2_font_profont11_tf);
-      u8g2.drawStr(25, 40, "Hola");
+      u8g2.drawStr(10, 29, "Margarita");
+      u8g2.drawStr(10, 39, "Sangria");
+      u8g2.drawStr(10, 49, "Mojito");
+      u8g2.drawStr(10, 59, "Bloody Mary");
 
     } while( u8g2.nextPage() );
 }
