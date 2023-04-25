@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <U8g2lib.h>
 #include <U8x8lib.h>
+#include "encoder.h"
 
 #define RS 10
 #define RW 11
@@ -13,9 +14,13 @@
 #define motor_4 6
 #define motor_5 7
 
-#define SW 12
-#define DT 1
-#define CLK 2
+#define salidaA 9
+#define salidaB 2
+#define boton 12
+
+// int contador = 0; 
+// int estadoA;
+// int estadoPrevioA;  
 
 U8G2_ST7920_128X64_1_HW_SPI u8g2(U8G2_R0, /* CS=*/ 10, /* reset=*/ 8);
 
@@ -30,44 +35,47 @@ void setup() {
   pinMode(motor_4, OUTPUT);
   pinMode(motor_5, OUTPUT);
 
+  encoderSetup();
+
   u8g2.begin();
   u8g2.enableUTF8Print(); 
   u8g2.setColorIndex(1); 
 }
 
 void loop() {
-  // u8g2.firstPage();
-  //   do
-  //   { 
-  //     firstPage();
-  //   } while( u8g2.nextPage() );
 
-  //   delay(1000);
+  //  if (estadoA != estadoPrevioA){     
+  //    // Si el estado de salida B es diferente del estado
+  //    // de salida A el codificador esta girando a la derecha
+  //    if (digitalRead(salidaB) != estadoA) { 
+  //      contador ++;
+  //    } else {
+  //      contador --;
+  //    }
+  //    Serial.print("Posición: ");
+  //    Serial.println(contador);
+  //  } 
+  //  // actualiza el estado guardado
+  //  estadoPrevioA = estadoA;
+  // int up = 20;
+  // int down = 30;
+  // int mid = 25;
+  
+  // for(int i = 0; i < 4; i++)
+  // {
 
   //   u8g2.firstPage();
-  //   do
-  //   {
-  //     secondPage();
-  //   } while ( u8g2.nextPage());
+  //     do
+  //     { 
+  //       introPage(up, down, mid);
+  //     } while( u8g2.nextPage() );
+  //   up = up+10;
+  //   down = down + 10;
+  //   mid = mid + 10;
+
   //   delay(1000);
-  int up = 20;
-  int down = 30;
-  int mid = 25;
-  
-  for(int i = 0; i < 4; i++)
-  {
-
-    u8g2.firstPage();
-      do
-      { 
-        introPage(up, down, mid);
-      } while( u8g2.nextPage() );
-    up = up+10;
-    down = down + 10;
-    mid = mid + 10;
-
-    delay(1000);
-  }
+  // }
+  encoder();
 }
 
 void drawTitle()
