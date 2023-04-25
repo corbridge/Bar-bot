@@ -43,39 +43,26 @@ void setup() {
 }
 
 void loop() {
-
-  //  if (estadoA != estadoPrevioA){     
-  //    // Si el estado de salida B es diferente del estado
-  //    // de salida A el codificador esta girando a la derecha
-  //    if (digitalRead(salidaB) != estadoA) { 
-  //      contador ++;
-  //    } else {
-  //      contador --;
-  //    }
-  //    Serial.print("Posición: ");
-  //    Serial.println(contador);
-  //  } 
-  //  // actualiza el estado guardado
-  //  estadoPrevioA = estadoA;
-  // int up = 20;
-  // int down = 30;
-  // int mid = 25;
+  int contador = 0;
+  int up = 20;
+  int down = 30;
+  int mid = 25;
   
-  // for(int i = 0; i < 4; i++)
-  // {
+  for(int i = 0; i < 4; i++)
+  {
 
-  //   u8g2.firstPage();
-  //     do
-  //     { 
-  //       introPage(up, down, mid);
-  //     } while( u8g2.nextPage() );
-  //   up = up+10;
-  //   down = down + 10;
-  //   mid = mid + 10;
+    u8g2.firstPage();
+      do
+      { 
+        introPage(up, down, mid);
+      } while( u8g2.nextPage() );
+    up = up+10;
+    down = down + 10;
+    mid = mid + 10;
 
-  //   delay(1000);
-  // }
-  encoder();
+    delay(1000);
+  }
+  contador = encoder();
 }
 
 void drawTitle()

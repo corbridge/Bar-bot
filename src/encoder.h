@@ -18,7 +18,7 @@ void encoderSetup()
     estadoPrevioA = digitalRead(salidaA); 
 }
 
-void encoder()
+int encoder()
 {
     estadoA = digitalRead(salidaA);
     if (estadoA != estadoPrevioA){     
@@ -27,8 +27,7 @@ void encoder()
     } else {
         contador --;
         }
-    Serial.print("Posición: ");
-    Serial.println(contador);
     } 
     estadoPrevioA = estadoA;
+    return contador;
 }
