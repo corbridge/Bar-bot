@@ -21,6 +21,15 @@
 // int contador = 0; 
 // int estadoA;
 // int estadoPrevioA;
+int contador = 0;
+int contadorAnt = 0;
+int maxUp = 50;
+int maxMid = 55;
+int maxDown = 60;
+
+int minUp = 20;
+int minMid = 25;
+int minDown = 30;
 
 U8G2_ST7920_128X64_1_HW_SPI u8g2(U8G2_R0, /* CS=*/ 10, /* reset=*/ 8);
 
@@ -43,21 +52,9 @@ void setup() {
 }
 
 void loop() {
-  int contadorAnt = 0;
-
   int up = 20;
   int mid = 25;
   int down = 30;
-
-  int maxUp = 50;
-  int maxMid = 55;
-  int maxDown = 60;
-
-  int minUp = 20;
-  int minMid = 25;
-  int minDown = 30;
-
-  int contador = 0;
   // int up = 20;
   // int down = 30;
   // int mid = 25;
