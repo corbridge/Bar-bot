@@ -81,8 +81,8 @@ void secondPage(int up, int down, int mid)
   u8g2.drawTriangle(0,up, 0,down, 5,mid);
   drawTitle();
   u8g2.setFont(u8g2_font_profont11_tf);
-  u8g2.drawStr(10, 29, "Margarita 2");
-  u8g2.drawStr(10, 39, "Sangria 2");
-  u8g2.drawStr(10, 49, "Mojito 2");
-  u8g2.drawStr(10, 59, "Bloody Mary 2");
+  u8g2.drawStr(10, 29, "Vampiro");
+  u8g2.drawStr(10, 39, "Tequila");
+  u8g2.drawStr(10, 49, "Vodka");
+  u8g2.drawStr(10, 59, "Limpieza");
 }
