@@ -18,10 +18,6 @@
 #define salidaB 2
 #define boton 12
 
-// int contador = 0; 
-// int estadoA;
-// int estadoPrevioA;  
-
 U8G2_ST7920_128X64_1_HW_SPI u8g2(U8G2_R0, /* CS=*/ 10, /* reset=*/ 8);
 
 void drawTitle();
@@ -43,26 +39,14 @@ void setup() {
 }
 
 void loop() {
-  int contador = 0;
-  int up = 20;
-  int down = 30;
-  int mid = 25;
-  
-  for(int i = 0; i < 4; i++)
-  {
 
-    u8g2.firstPage();
-      do
-      { 
-        introPage(up, down, mid);
-      } while( u8g2.nextPage() );
-    up = up+10;
-    down = down + 10;
-    mid = mid + 10;
+  u8g2.firstPage();
+  do{ 
+    encoder();
+    encoderAlgorithm();
+    introPage(up, down, mid);
+  }while( u8g2.nextPage() );
 
-    delay(1000);
-  }
-  contador = encoder();
 }
 
 void drawTitle()
