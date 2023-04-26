@@ -20,7 +20,21 @@
 
 // int contador = 0; 
 // int estadoA;
-// int estadoPrevioA;  
+// int estadoPrevioA;
+
+int contadorAnt = 0;
+
+int up = 20;
+int mid = 25;
+int down = 30;
+
+int maxUp = 50;
+int maxMid = 55;
+int maxDown = 60;
+
+int minUp = 20;
+int minMid = 25;
+int minDown = 30;
 
 U8G2_ST7920_128X64_1_HW_SPI u8g2(U8G2_R0, /* CS=*/ 10, /* reset=*/ 8);
 
@@ -48,21 +62,49 @@ void loop() {
   int down = 30;
   int mid = 25;
   
-  for(int i = 0; i < 4; i++)
-  {
+  // for(int i = 0; i < 4; i++)
+  // {
 
-    u8g2.firstPage();
-      do
-      { 
-        introPage(up, down, mid);
-      } while( u8g2.nextPage() );
-    up = up+10;
-    down = down + 10;
-    mid = mid + 10;
+  //   u8g2.firstPage();
+  //     do
+  //     { 
+  //       introPage(up, down, mid);
+  //     } while( u8g2.nextPage() );
+  //   up = up+10;
+  //   down = down + 10;
+  //   mid = mid + 10;
 
-    delay(1000);
-  }
+  //   delay(1000);
+  // }
+
+  u8g2.firstPage();
+
+  do{ 
+    introPage(up, down, mid);
+  }while( u8g2.nextPage() );
+
   contador = encoder();
+  if(contador > contadorAnt){
+      up += 10;
+      mid += 10;
+      down += 10;
+  }else if(contador < contadorAnt){
+      up -= 10;
+      mid -= 10;
+      down -= 10;
+  }
+
+  contadorAnt = contador;
+
+  if(up > upMax){
+      up = minUp;
+      mid = minMid;
+      down = minDown;
+  }else if(up < upMin){
+      up = maxUp;
+      mid = maxMid;
+      down = maxDown;
+  }
 }
 
 void drawTitle()
