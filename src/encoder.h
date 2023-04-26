@@ -27,7 +27,9 @@ int encoder()
     } else {
         contador --;
         }
-    } 
+    }
+    Serial.print("Posición: ");
+    Serial.println(contador);
     estadoPrevioA = estadoA;
     return contador;
 }
