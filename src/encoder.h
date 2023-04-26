@@ -18,18 +18,18 @@ void encoderSetup()
     estadoPrevioA = digitalRead(salidaA); 
 }
 
-int encoder()
+void encoder()
 {
     estadoA = digitalRead(salidaA);
+    delay(10);
     if (estadoA != estadoPrevioA){     
     if (digitalRead(salidaB) != estadoA) { 
     contador ++;
     } else {
         contador --;
         }
-    }
     Serial.print("Posición: ");
     Serial.println(contador);
+    }
     estadoPrevioA = estadoA;
-    return contador;
 }
