@@ -40,6 +40,7 @@ U8G2_ST7920_128X64_1_HW_SPI u8g2(U8G2_R0, /* CS=*/ 10, /* reset=*/ 8);
 void drawTitle();
 void introPage(int, int, int);
 void secondPage();
+void encoderAlgorithm();
 
 void setup() {
   pinMode(motor_1, OUTPUT);
@@ -74,14 +75,17 @@ void loop() {
 
   //   delay(1000);
   // }
-
   u8g2.firstPage();
   do{ 
+    encoder();
+    encoderAlgorithm();
     introPage(up, down, mid);
   }while( u8g2.nextPage() );
 
-  encoder();
+}
 
+void encoderAlgorithm()
+{
   if(contador > contadorAnt){
       up += 10;
       mid += 10;
