@@ -17,6 +17,8 @@ int minUp = 20;
 int minMid = 25;
 int minDown = 30;
 
+int page = 0;
+
 int up = 20;
 int mid = 25;
 int down = 30;
@@ -63,14 +65,34 @@ void encoderAlgorithm()
 
     contadorAnt = contador;
 
-    if(up > maxUp){
-        up = minUp;
-        mid = minMid;
-        down = minDown;
+    if(up<minUp){
+        switch(page){
+        case 0:
+            up = minUp;
+            mid = minMid;
+            down = minDown;
+            break;
+        case 1:
+            page--;
+            up = maxUp;
+            mid = maxMid;
+            down = maxDown;
+            break;
+        }
     }
-    if(up < minUp){
-        up = maxUp;
-        mid = maxMid;
-        down = maxDown;
-    }
+    if(up>maxUp){
+        switch(page){
+            case 0:
+                page++;
+                up = minUp;
+                mid = minMid;
+                down = minDown;
+                break;
+            case 1:  
+                up = maxUp;
+                mid = maxMid;
+                down = maxDown;
+                break;
+        }
+    }   
 }

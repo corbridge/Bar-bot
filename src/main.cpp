@@ -22,7 +22,7 @@ U8G2_ST7920_128X64_1_HW_SPI u8g2(U8G2_R0, /* CS=*/ 10, /* reset=*/ 8);
 
 void drawTitle();
 void introPage(int, int, int);
-void secondPage();
+void secondPage(int, int, int);
 
 void setup() {
   pinMode(motor_1, OUTPUT);
@@ -44,10 +44,18 @@ void loop() {
   do{ 
     encoder();
     encoderAlgorithm();
-    introPage(up, down, mid);
+    switch(page){
+      case 0:
+        introPage(up, down, mid);
+        break;
+      case 1:
+        secondPage(up, down, mid);
+        break;  
+    }
   }while( u8g2.nextPage() );
-
 }
+
+
 
 void drawTitle()
 {
@@ -67,14 +75,14 @@ void introPage(int up, int down, int mid)
   u8g2.drawStr(10, 59, "Bloody Mary");
 }
 
-void secondPage()
+void secondPage(int up, int down, int mid)
 {
   u8g2.drawLine(150, 18, 0, 18);
-  u8g2.drawTriangle(0,30, 0,40, 5,35);
+  u8g2.drawTriangle(0,up, 0,down, 5,mid);
   drawTitle();
   u8g2.setFont(u8g2_font_profont11_tf);
-  u8g2.drawStr(10, 29, "Margarita");
-  u8g2.drawStr(10, 39, "Sangria");
-  u8g2.drawStr(10, 49, "Mojito");
-  u8g2.drawStr(10, 59, "Bloody Mary");
+  u8g2.drawStr(10, 29, "Margarita 2");
+  u8g2.drawStr(10, 39, "Sangria 2");
+  u8g2.drawStr(10, 49, "Mojito 2");
+  u8g2.drawStr(10, 59, "Bloody Mary 2");
 }
