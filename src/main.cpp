@@ -86,7 +86,8 @@ void loop() {
       up += 10;
       mid += 10;
       down += 10;
-  }else if(contador < contadorAnt){
+  }
+  if(contador < contadorAnt){
       up -= 10;
       mid -= 10;
       down -= 10;
