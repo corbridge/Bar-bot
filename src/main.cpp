@@ -96,11 +96,11 @@ void loop() {
 
   contadorAnt = contador;
 
-  if(up > upMax){
+  if(up > maxUp){
       up = minUp;
       mid = minMid;
       down = minDown;
-  }else if(up < upMin){
+  }else if(up < minUp){
       up = maxUp;
       mid = maxMid;
       down = maxDown;
