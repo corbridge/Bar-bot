@@ -22,6 +22,7 @@
 // int estadoA;
 // int estadoPrevioA;
 // int contador = 0;
+int contador_encoder;
 int contadorAnt = 0;
 int maxUp = 50;
 int maxMid = 55;
@@ -76,34 +77,38 @@ void loop() {
   // }
 
   u8g2.firstPage();
-
   do{ 
     introPage(up, down, mid);
   }while( u8g2.nextPage() );
 
-  contador = encoder();
-  if(contador > contadorAnt){
+  contador_encoder = encoder();
+
+  if(contador_encoder > contadorAnt){
       up += 10;
       mid += 10;
       down += 10;
   }
-  if(contador < contadorAnt){
+  if(contador_encoder < contadorAnt){
       up -= 10;
       mid -= 10;
       down -= 10;
   }
 
-  contadorAnt = contador;
+  contadorAnt = contador_encoder;
 
   if(up > maxUp){
       up = minUp;
       mid = minMid;
       down = minDown;
-  }else if(up < minUp){
+  }
+  if(up < minUp){
       up = maxUp;
       mid = maxMid;
       down = maxDown;
   }
+
+  Serial.println(contador);
+
 }
 
 void drawTitle()
