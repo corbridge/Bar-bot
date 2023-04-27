@@ -125,10 +125,8 @@ void encoderButton()
     if(contador_button % 2 != 0)
     {
         click = 1;
-        Serial.println("ON");
-    }
-    else
+    }else
     {
-        Serial.println("OFF");
+        click = 0;
     }
 }
