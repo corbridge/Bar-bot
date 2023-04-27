@@ -23,6 +23,10 @@ int up = 20;
 int mid = 25;
 int down = 30;
 
+int contador_button = 0;
+int contador_original = 0;
+int click = 0;
+
 void encoderSetup()
 {
     pinMode (salidaA,INPUT);  
@@ -95,4 +99,16 @@ void encoderAlgorithm()
                 break;
         }
     }   
+}
+
+void encoderButton()
+{
+    bool Bot = digitalRead(boton);
+    contador_original = contador_button;
+    if (!Bot) // si se pulsa el boton su valor va a BAJO
+    { 
+        contador_button++;
+    }
+    Serial.println(contador_button - contador_original);
+    delay(100);
 }
