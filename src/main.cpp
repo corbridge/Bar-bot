@@ -23,6 +23,8 @@ U8G2_ST7920_128X64_1_HW_SPI u8g2(U8G2_R0, /* CS=*/ 10, /* reset=*/ 8);
 void drawTitle();
 void introPage(int, int, int);
 void secondPage(int, int, int);
+void firstOptionPage();
+void cleanTitle();
 
 void setup() {
   pinMode(motor_1, OUTPUT);
@@ -44,6 +46,7 @@ void loop() {
   do{ 
     encoder();
     encoderAlgorithm();
+    encoderButton();
     switch(page){
       case 0:
         introPage(up, down, mid);
@@ -61,6 +64,12 @@ void drawTitle()
 {
   u8g2.setFont(u8g2_font_profont22_tf);
   u8g2.drawStr(25, 15, "BAR-BOT");
+}
+
+void cleanTitle()
+{
+  u8g2.drawStr(25, 5, "       ");
+  u8g2.drawStr(25, 15, "       ");
 }
 
 void introPage(int up, int down, int mid)
@@ -85,4 +94,13 @@ void secondPage(int up, int down, int mid)
   u8g2.drawStr(10, 39, "Tequila");
   u8g2.drawStr(10, 49, "Vodka");
   u8g2.drawStr(10, 59, "Limpieza");
+}
+
+void firstOptionPage()
+{
+  drawTitle();
+  u8g2.drawLine(150, 18, 0, 18);
+  u8g2.setFont(u8g2_font_profont11_tf);
+  u8g2.drawStr(10, 29, "PRIMERA OPCION");
+  u8g2.drawStr(10, 39, "SELECCIONADA");
 }

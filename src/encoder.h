@@ -27,6 +27,13 @@ int contador_button = 0;
 int contador_original = 0;
 int click = 0;
 
+byte state = LOW;
+byte buttonState;
+byte lastButtonState;
+
+unsigned long lastTimeButtonStateChanged = millis();
+unsigned long debounceDuration = 50;
+
 void encoderSetup()
 {
     pinMode (salidaA,INPUT);  
@@ -103,12 +110,25 @@ void encoderAlgorithm()
 
 void encoderButton()
 {
-    bool Bot = digitalRead(boton);
-    contador_original = contador_button;
-    if (!Bot) // si se pulsa el boton su valor va a BAJO
-    { 
-        contador_button++;
+    buttonState = digitalRead(boton);
+    
+    if(buttonState != lastButtonState)
+    {
+        if(buttonState == LOW)
+        {
+            contador_button++;
+        }
+        delay(20);
     }
-    Serial.println(contador_button - contador_original);
-    delay(100);
+    lastButtonState = buttonState;
+
+    if(contador_button % 2 != 0)
+    {
+        click = 1;
+        Serial.println("ON");
+    }
+    else
+    {
+        Serial.println("OFF");
+    }
 }
