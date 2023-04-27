@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include "screens.h"
 
 #define salidaA 9
 #define salidaB 2
@@ -125,7 +126,10 @@ void encoderButton()
     if(contador_button % 2 != 0)
     {
         click = 1;
-        Serial.println("ON");
+
+        //Serial.println("ON");
+        optionPage(page, up);
+        delay(1000);
     }
     else
     {

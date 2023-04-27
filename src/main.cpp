@@ -1,5 +1,5 @@
-#include "screens.h"
 #include "encoder.h"
+//#include "screens.h"
 #include "pumps.h"
 
 #define RS 10
@@ -22,10 +22,10 @@ void loop() {
     encoderButton();
     switch(page){
       case 0:
-        introPage(up, down, mid);
+        introPage(up, down, mid, bebidas, page);
         break;
       case 1:
-        secondPage(up, down, mid);
+        secondPage(up, down, mid, bebidas, page);
         break;  
     }
   }while( u8g2.nextPage() );
