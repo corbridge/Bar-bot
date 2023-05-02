@@ -34,8 +34,8 @@ void introPage(int up, int down, int mid, char (*bebidas)[4][12], int page){
     drawTitle();
     u8g2.setFont(u8g2_font_profont11_tf);
     u8g2.drawStr(10, 29, "Margarita");
-    u8g2.drawStr(10, 39, "Sangria");
-    u8g2.drawStr(10, 49, "Mojito");
+    u8g2.drawStr(10, 39, "Mojito");
+    u8g2.drawStr(10, 49, "Sangria");
     u8g2.drawStr(10, 59, "Bloody Mary");
 }
 
