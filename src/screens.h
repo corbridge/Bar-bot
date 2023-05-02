@@ -55,7 +55,13 @@ void optionPage(int page, int up)
     drawTitle();
     int opcion = (up/10)-2;
     u8g2.drawLine(150, 18, 0, 18);
+    u8g2.drawTriangle(0,40, 0,50, 5,45);
+    u8g2.setFont(u8g2_font_profont10_tf);
+    u8g2.drawStr(50, 29, bebidas[page][opcion]);
+    u8g2.drawStr(5, 29, "Elegiste:");
+
     u8g2.setFont(u8g2_font_profont11_tf);
-    u8g2.drawStr(10, 29, bebidas[page][opcion]);
-    u8g2.drawStr(10, 39, "SELECCIONADA");
+    u8g2.drawStr(10, 49, "Servir bebida");
+    u8g2.drawStr(10, 59, "Regresar");
+
 }
