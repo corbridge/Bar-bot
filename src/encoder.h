@@ -126,8 +126,12 @@ void encoderButton()
     if(contador_button % 2 != 0)
     {
         click = 1;
+<<<<<<< HEAD
     }
     else
+=======
+    }else
+>>>>>>> 43ffd759c6bbed2d89fbff90333980d6b1a4729d
     {
         click = 0;
     }
