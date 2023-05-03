@@ -32,6 +32,10 @@ byte state = LOW;
 byte buttonState;
 byte lastButtonState;
 
+int submenu = 0;
+
+int page_ant = 0;
+
 unsigned long lastTimeButtonStateChanged = millis();
 unsigned long debounceDuration = 50;
 
@@ -64,49 +68,77 @@ void encoder()
 
 void encoderAlgorithm()
 {
-    if(contador > contadorAnt){
-        up += 10;
-        mid += 10;
-        down += 10;
-    }
-    if(contador < contadorAnt){
-        up -= 10;
-        mid -= 10;
-        down -= 10;
-    }
-
-    contadorAnt = contador;
-
-    if(up<minUp){
-        switch(page){
-        case 0:
-            up = minUp;
-            mid = minMid;
-            down = minDown;
-            break;
-        case 1:
-            page--;
-            up = maxUp;
-            mid = maxMid;
-            down = maxDown;
-            break;
+    if(page == 0 or page == 1){
+        if(contador > contadorAnt){
+            up += 10;
+            mid += 10;
+            down += 10;
         }
-    }
-    if(up>maxUp){
-        switch(page){
+        if(contador < contadorAnt){
+            up -= 10;
+            mid -= 10;
+            down -= 10;
+        }
+
+        contadorAnt = contador;
+
+        if(up<minUp){
+            switch(page){
             case 0:
-                page++;
                 up = minUp;
                 mid = minMid;
                 down = minDown;
                 break;
-            case 1:  
+            case 1:
+                page--;
                 up = maxUp;
                 mid = maxMid;
                 down = maxDown;
                 break;
+            }
         }
-    }   
+        if(up>maxUp){
+            switch(page){
+                case 0:
+                    page++;
+                    up = minUp;
+                    mid = minMid;
+                    down = minDown;
+                    break;
+                case 1:  
+                    up = maxUp;
+                    mid = maxMid;
+                    down = maxDown;
+                    break;
+            }
+        } 
+    }else{
+        if(contador > contadorAnt){
+            upSub += 10;
+            midSub += 10;
+            downSub += 10;
+        }
+        if(contador < contadorAnt){
+            upSub -= 10;
+            midSub -= 10;
+            downSub -= 10;
+        }
+
+        contadorAnt = contador;
+
+        if(upSub<minUpSub){
+            upSub = maxUpSub;
+            midSub = maxMidSub;
+            downSub = maxDownSub;
+        }
+        if(upSub>maxUp){ 
+            upSub = minUpSub;
+            midSub = minMidSub;
+            downSub = minDownSub;
+
+        }
+    }
+  
 }
 
 void encoderButton()

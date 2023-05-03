@@ -7,7 +7,10 @@
 #define Enable 13
 #define RST 8
 
-void sendSubMenu(int page, int up);
+float volatile time;
+float volatile timeActual;
+
+void sendSubMenu(int up);
 
 void setup() {
   pumpsSetup();
@@ -21,29 +24,52 @@ void loop() {
   do{ 
     encoder();
     encoderAlgorithm();
+    sendSubMenu(up);
     switch(page){
       case 0:
         introPage(up, down, mid, bebidas, page);
-        sendSubMenu(page, up);
+        //sendSubMenu(page, up);
         break;
       case 1:
         secondPage(up, down, mid, bebidas, page);
-        sendSubMenu(page, up);
-        break;  
+        //sendSubMenu(page, up);
+        break;
+      case 2:
+        optionPage(page_ant, up);
+        //sendSubMenu(page, up);
+        break;
+      case 3:
+        fillingPage(up, bebidas, page_ant);
+        timeActual = millis();
+        if(timeActual - time > 2000){
+          page = 0;
+        } 
+        break;
     }
   }while( u8g2.nextPage() );
+  Serial.println("Loop");
 }
 
-void sendSubMenu(int page, int up)
+void sendSubMenu(int up)
 {
-    encoderButton(); 
-    if(click == 1)
-        {
-        do
-        {
-            optionPage(page, up);
-            if(click == 0) break;
-        } while (u8g2.nextPage());
-        
+    encoderButton();
+    if(click == 1){
+      if(page == 0 or page == 1){
+      
+            page_ant = page;
+            page = 2;
+          
         }
+    }else if(click == 0){
+      if(page == 2){
+        //whitePage();
+        if(upSub == minUpSub){
+
+          page = 3;
+          time = millis();
+        }else{
+          page = page_ant;
+        }
+      }
+    }
 }
