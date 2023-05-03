@@ -1,41 +1,75 @@
-#include <Arduino.h>
-#include <U8g2lib.h>
-#include <U8x8lib.h>
+#include "encoder.h"
+//#include "screens.h"
+#include "pumps.h"
 
 #define RS 10
 #define RW 11
 #define Enable 13
 #define RST 8
 
-#define motor_1 3
-#define motor_2 4
-#define motor_3 5
-#define motor_4 6
-#define motor_5 7
+float volatile time;
+float volatile timeActual;
 
-#define SW 12
-#define DT 1
-#define CLK 2
-
-U8G2_ST7920_128X64_1_HW_SPI u8g2(U8G2_R0, /* CS=*/ 10, /* reset=*/ 8);
+void sendSubMenu(int up);
 
 void setup() {
-  pinMode(motor_1, OUTPUT);
-  pinMode(motor_2, OUTPUT);
-  pinMode(motor_3, OUTPUT);
-  pinMode(motor_4, OUTPUT);
-  pinMode(motor_5, OUTPUT);
-
-  u8g2.begin();
-  u8g2.enableUTF8Print();
-  u8g2.setFont(u8g2_font_t0_12_tf); 
-  u8g2.setColorIndex(1); 
+  pumpsSetup();
+  encoderSetup();
+  screensSetup();
 }
 
 void loop() {
+
   u8g2.firstPage();
-  
-    do {   
-    u8g2.drawStr( 15, 13, "Temperature");
-  } while( u8g2.nextPage() );
+  do{ 
+    encoder();
+    encoderAlgorithm();
+    sendSubMenu(up);
+    switch(page){
+      case 0:
+        introPage(up, down, mid, bebidas, page);
+        //sendSubMenu(page, up);
+        break;
+      case 1:
+        secondPage(up, down, mid, bebidas, page);
+        //sendSubMenu(page, up);
+        break;
+      case 2:
+        optionPage(page_ant, up);
+        //sendSubMenu(page, up);
+        break;
+      case 3:
+        fillingPage(up, bebidas, page_ant);
+        timeActual = millis();
+        if(timeActual - time > 2000){
+          page = 0;
+        } 
+        break;
+    }
+  }while( u8g2.nextPage() );
+  Serial.println("Loop");
+}
+
+void sendSubMenu(int up)
+{
+    encoderButton();
+    if(click == 1){
+      if(page == 0 or page == 1){
+      
+            page_ant = page;
+            page = 2;
+          
+        }
+    }else if(click == 0){
+      if(page == 2){
+        //whitePage();
+        if(upSub == minUpSub){
+
+          page = 3;
+          time = millis();
+        }else{
+          page = page_ant;
+        }
+      }
+    }
 }
