@@ -37,22 +37,14 @@ void loop() {
         break;
       case 3:
         fillingPage(up, bebidas, page_ant);
-        //timeActual = millis();
         if(not Pumps){
           pumpsActivation(up, page_ant);
-          //Serial.println("Activadas");
         }else{
           pumpsDeactivation(time);
-          //Serial.println("Desactivadas");
         }
-    
-        // if(timeActual - time > 2000){
-        //   page = 0;
-        // } 
         break;
     }
   }while( u8g2.nextPage() );
-  //Serial.println("Loop");
 }
 
 void sendSubMenu(int up)
@@ -66,12 +58,14 @@ void sendSubMenu(int up)
           
         }
     }else if(click == 0){
+      //Si cambia el estado del boton estando en la pagina 2
       if(page == 2){
-        //whitePage();
-        if(upSub == minUpSub){
-
+        //Vamos a la pagina de filling si seleccionaron la primera opcion
+        if(upSub == minUpSub){  
           page = 3;
+          //Se toma el tiempo en el que se van a encender las bombas ppor primera vez
           time = millis();
+        //Si era la segunda opcion, se regresa el menu a el anterior
         }else{
           page = page_ant;
         }

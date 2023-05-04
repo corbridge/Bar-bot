@@ -47,6 +47,7 @@ void pumpsSetup()
 }
 
 void pumpsActivation(int up, int page){
+    //Recolectamos el tiempo de cada bomba dentro de un vector
     int bebida = (up/10)-2;
     if(page == 1){
         bebida += 4;
@@ -54,22 +55,21 @@ void pumpsActivation(int up, int page){
     for(int i=0;i<5;i++){
         timePumps[i] = timeDrinks[bebida][i]*1000.0;
     }
-    //timePumps[] = timeDrinks[bebida];
+    //Con el vector anterior, guardamos el tiempo de cada bomba en una variable
     timeP1 = timePumps[0];
     timeP2 = timePumps[1];
     timeP3 = timePumps[2];
     timeP4 = timePumps[3];
     timeP5 = timePumps[4];
 
-    //volatile float time_drinks = millis();
-
+    //Encontramos cual es el maximo tiempo que va a estar encendida la ultima bomba
     for(int i=0;i<5;i++){
         if(timePumps[i] > timeMax){
             timeMax = timePumps[i];
         }
     }
 
-    //Encender bombas
+    //Encendemos bombas
     if(timeP1 != 0){
         digitalWrite(motor_1, HIGH);
         Serial.println("Bomba 1 Encendida");
@@ -95,17 +95,15 @@ void pumpsActivation(int up, int page){
         Serial.println("Bomba 5 Encendida");
         stateP5 = 1;
     }
-
+    //Se activa la bandera de las bombas
     Pumps = 1;
 }
 
 void pumpsDeactivation(float volatile time){
-    
+    //Tomamos el tiempo actual
     float volatile time_drinks = millis();
 
-    //Serial.println(time - time_drinks);
-
-    //Apagar bombas
+    //Comparamos el tiempo actucal con el tiempo en el que se encendrieron las bombas y si es mayor al tiempo que debe estar encendida, se apaga dicha bomba
     if(time_drinks - time >= timeP1 and stateP1){
         digitalWrite(motor_1, LOW);
         Serial.println("Bomba 1 Apagada");
@@ -132,6 +130,7 @@ void pumpsDeactivation(float volatile time){
         stateP5 = 0;
     }
 
+    //Si ya se apago la ultima bomba, desactivamos la bandera de las bombas y salimos de la pagina de filling
     if(time_drinks - time >= timeMax){
         Pumps = 0;
         page = 0;
