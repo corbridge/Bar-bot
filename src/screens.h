@@ -94,10 +94,10 @@ void whitePage(){
     drawTitle();
     u8g2.drawLine(150, 18, 0, 18);
     u8g2.setFont(u8g2_font_profont10_tf);
-    u8g2.drawStr(0, 20, "ooooooooooooooooooooooooooooooooooo");
-    u8g2.drawStr(0, 30, "ooooooooooooooooooooooooooooooooooo");
-    u8g2.drawStr(0, 40, "ooooooooooooooooooooooooooooooooooo");
-    u8g2.drawStr(0, 50, "ooooooooooooooooooooooooooooooooooo");
+    u8g2.drawStr(0, 20, "                                   ");
+    u8g2.drawStr(0, 30, "                                   ");
+    u8g2.drawStr(0, 40, "                                   ");
+    u8g2.drawStr(0, 50, "                                   ");
     //u8g2.drawStr(0, 20, "                                   ");
 
 }

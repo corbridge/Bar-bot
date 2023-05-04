@@ -1,4 +1,4 @@
-#include "encoder.h"
+//#include "encoder.h"
 //#include "screens.h"
 #include "pumps.h"
 
@@ -28,26 +28,31 @@ void loop() {
     switch(page){
       case 0:
         introPage(up, down, mid, bebidas, page);
-        //sendSubMenu(page, up);
         break;
       case 1:
         secondPage(up, down, mid, bebidas, page);
-        //sendSubMenu(page, up);
         break;
       case 2:
         optionPage(page_ant, up);
-        //sendSubMenu(page, up);
         break;
       case 3:
         fillingPage(up, bebidas, page_ant);
-        timeActual = millis();
-        if(timeActual - time > 2000){
-          page = 0;
-        } 
+        //timeActual = millis();
+        if(not Pumps){
+          pumpsActivation(up, page_ant);
+          //Serial.println("Activadas");
+        }else{
+          pumpsDeactivation(time);
+          //Serial.println("Desactivadas");
+        }
+    
+        // if(timeActual - time > 2000){
+        //   page = 0;
+        // } 
         break;
     }
   }while( u8g2.nextPage() );
-  Serial.println("Loop");
+  //Serial.println("Loop");
 }
 
 void sendSubMenu(int up)
