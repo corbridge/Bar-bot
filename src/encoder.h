@@ -3,7 +3,7 @@
 
 #define salidaA 9
 #define salidaB 2
-#define boton 12
+#define boton A0
 
 int contador = 0; 
 int estadoA;
@@ -144,6 +144,7 @@ void encoderAlgorithm()
 void encoderButton()
 {
     buttonState = digitalRead(boton);
+    Serial.println(buttonState);
     
     if(buttonState != lastButtonState)
     {

@@ -27,15 +27,18 @@ int stateP5 = 0;
 
 /*
                         bebida------>[bomba1,bomba2,bomba3,bomba4,bomba5]
+                        1ra bomba = tequila
 */
-float timeDrinks[n_drinks][n_pumps] = {{3,0,2,1,1},
-                                       {1,1,1,0,1},
-                                       {1,0,1,1,1},
-                                       {1,1,1,0,1},
-                                       {1,0,1,1,1},
-                                       {1,0,1,1,1},
-                                       {1,0,1,1,1},
-                                       {1,0,1,1,1}};
+float timeDrinks[n_drinks][n_pumps] = {{3,0,0,0,0},
+                                       {0,3,0,0,0},
+                                       {0,0,3,0,0},
+                                       {0,0,0,3,0},
+                                       {0,0,0,0,3},
+                                       {0,0,0,3,0},
+                                       {0,0,3,0,0},
+                                       {3,3,3,3,3}};
+
+//1 segundo equivale aprox a 20 ml, una vez seteada la maquina
 
 void pumpsSetup()
 {
