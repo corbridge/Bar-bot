@@ -19,8 +19,8 @@ int minDownSub = 50;
 
 U8G2_ST7920_128X64_1_HW_SPI u8g2(U8G2_R0, /* CS=*/ 10, /* reset=*/ 8);
 
-char bebidas[2][4][12] = {
-    {"Margarita", "Mojito", "Sangria", "Bloody Mary"},
+char bebidas[2][4][20] = {
+    {"Margarita", "Shot Tequila", "Sangria", "Bloody Mary"},
     {"Vampiro", "Tequila", "Vodka", "Limpieza"}
 };
 
@@ -43,18 +43,18 @@ void cleanTitle()
     u8g2.drawStr(25, 15, "       ");
 }
 
-void introPage(int up, int down, int mid, char (*bebidas)[4][12], int page){
+void introPage(int up, int down, int mid, char (*bebidas)[4][20], int page){
     u8g2.drawLine(150, 18, 0, 18);
     u8g2.drawTriangle(0,up,0,down,5,mid);
     drawTitle();
     u8g2.setFont(u8g2_font_profont11_tf);
     u8g2.drawStr(10, 29, "Margarita");
-    u8g2.drawStr(10, 39, "Mojito");
+    u8g2.drawStr(10, 39, "Shot Tequila");
     u8g2.drawStr(10, 49, "Sangria");
     u8g2.drawStr(10, 59, "Bloody Mary");
 }
 
-void secondPage(int up, int down, int mid, char (*bebidas)[4][12], int page){
+void secondPage(int up, int down, int mid, char (*bebidas)[4][20], int page){
     u8g2.drawLine(150, 18, 0, 18);
     u8g2.drawTriangle(0,up, 0,down, 5,mid);
     drawTitle();
@@ -80,7 +80,7 @@ void optionPage(int page, int up)
     u8g2.drawStr(10, 59, "Regresar");
 }
 
-void fillingPage(int up, char (*bebidas)[4][12], int page){
+void fillingPage(int up, char (*bebidas)[4][20], int page){
     u8g2.drawLine(150, 18, 0, 18);
     drawTitle();
     u8g2.setFont(u8g2_font_profont11_tf);
@@ -94,10 +94,10 @@ void whitePage(){
     drawTitle();
     u8g2.drawLine(150, 18, 0, 18);
     u8g2.setFont(u8g2_font_profont10_tf);
-    u8g2.drawStr(0, 20, "ooooooooooooooooooooooooooooooooooo");
-    u8g2.drawStr(0, 30, "ooooooooooooooooooooooooooooooooooo");
-    u8g2.drawStr(0, 40, "ooooooooooooooooooooooooooooooooooo");
-    u8g2.drawStr(0, 50, "ooooooooooooooooooooooooooooooooooo");
+    u8g2.drawStr(0, 20, "                                   ");
+    u8g2.drawStr(0, 30, "                                   ");
+    u8g2.drawStr(0, 40, "                                   ");
+    u8g2.drawStr(0, 50, "                                   ");
     //u8g2.drawStr(0, 20, "                                   ");
 
 }

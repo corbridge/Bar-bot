@@ -1,4 +1,4 @@
-#include "encoder.h"
+//#include "encoder.h"
 //#include "screens.h"
 #include "pumps.h"
 
@@ -28,26 +28,23 @@ void loop() {
     switch(page){
       case 0:
         introPage(up, down, mid, bebidas, page);
-        //sendSubMenu(page, up);
         break;
       case 1:
         secondPage(up, down, mid, bebidas, page);
-        //sendSubMenu(page, up);
         break;
       case 2:
         optionPage(page_ant, up);
-        //sendSubMenu(page, up);
         break;
       case 3:
         fillingPage(up, bebidas, page_ant);
-        timeActual = millis();
-        if(timeActual - time > 2000){
-          page = 0;
-        } 
+        if(not Pumps){
+          pumpsActivation(up, page_ant);
+        }else{
+          pumpsDeactivation(time);
+        }
         break;
     }
   }while( u8g2.nextPage() );
-  Serial.println("Loop");
 }
 
 void sendSubMenu(int up)
@@ -61,12 +58,14 @@ void sendSubMenu(int up)
           
         }
     }else if(click == 0){
+      //Si cambia el estado del boton estando en la pagina 2
       if(page == 2){
-        //whitePage();
-        if(upSub == minUpSub){
-
+        //Vamos a la pagina de filling si seleccionaron la primera opcion
+        if(upSub == minUpSub){  
           page = 3;
+          //Se toma el tiempo en el que se van a encender las bombas ppor primera vez
           time = millis();
+        //Si era la segunda opcion, se regresa el menu a el anterior
         }else{
           page = page_ant;
         }
